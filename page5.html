@@ -64,9 +64,11 @@
 const canvas = document.getElementById("confetti");
 const ctx = canvas.getContext("2d");
 
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-
+canvas.style.width = "100%";
+canvas.style.height = "100%";
 let pieces = [];
 let interval;
 
@@ -77,7 +79,7 @@ function createConfetti() {
     pieces.push({
       x: Math.random() * canvas.width,
       y: Math.random() * -canvas.height,
-      size: Math.random() * 14 + 18,
+      size: Math.random() * 8 + 12,
       speed: Math.random() * 2 + 1.5
     });
   }
