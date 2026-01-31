@@ -4,13 +4,10 @@
   <meta charset="UTF-8">
   <title>Okay...</title>
   <style>
-    <style>
 #confetti {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
   pointer-events: none;
   z-index: 9999;
 }
@@ -92,7 +89,7 @@ function drawConfetti() {
   pieces.forEach(p => {
     ctx.font = `${p.size}px Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, serif`;
     ctx.textBaseline = "top";
-    ctx.fillText("😭", p.x, p.y);
+    ctx.fillText("X", p.x, p.y);
     p.y += p.speed;
   });
 }
