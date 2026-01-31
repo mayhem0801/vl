@@ -3,8 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Valentine 💖</title>
-  <style>
-    body {
+  <style>#confetti {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+    
+    {
       background: linear-gradient(135deg,#ff4d6d,#ffb3c1);
       font-family: Arial, sans-serif;
       display:flex;
@@ -24,6 +33,7 @@
   </style>
 </head>
 <body>
+<canvas id="confetti"></canvas>
   <div class="card">
     <p>
       Thanks for accepting my proposal my loveeee,
@@ -35,5 +45,53 @@
     </p>
     <p><strong>I LOVE YOU JAANN ❤️❤️</strong></p>
   </div>
+  <script>
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let pieces = [];
+let interval;
+
+function createConfetti() {
+  pieces = [];
+  for (let i = 0; i < 160; i++) {
+    pieces.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * -canvas.height,
+      size: Math.random() * 6 + 4,
+      speed: Math.random() * 4 + 2,
+      color: `hsl(${Math.random() * 360}, 100%, 60%)`
+    });
+  }
+}
+
+function drawConfetti() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  pieces.forEach(p => {
+    ctx.beginPath();
+    ctx.fillStyle = p.color;
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+    p.y += p.speed;
+  });
+}
+
+function startConfetti() {
+  createConfetti();
+  interval = setInterval(drawConfetti, 20);
+
+  // auto stop after 4 seconds
+  setTimeout(() => {
+    clearInterval(interval);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }, 4000);
+}
+
+// 🔥 START AS SOON AS PAGE LOADS
+window.onload = startConfetti;
+  </script>
 </body>
 </html>
