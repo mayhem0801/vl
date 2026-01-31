@@ -82,11 +82,11 @@ function startConfetti() {
   createConfetti();
   interval = setInterval(drawConfetti, 20);
 
-  // auto stop after 4 seconds
+  // auto stop after 16 seconds
   setTimeout(() => {
     clearInterval(interval);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-  }, 6000);
+  }, 16000);
 }
 
 // 🔥 START AS SOON AS PAGE LOADS
