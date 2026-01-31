@@ -72,12 +72,12 @@ function drawConfetti() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   pieces.forEach(p => {
-    ctx.font = `${p.size}px serif`;
+    ctx.font = `${p.size}px Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, serif`;
+    ctx.textBaseline = "top";
     ctx.fillText("❤️", p.x, p.y);
     p.y += p.speed;
   });
 }
-
 function startConfetti() {
   createConfetti();
   interval = setInterval(drawConfetti, 20);
