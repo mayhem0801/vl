@@ -4,14 +4,15 @@
   <meta charset="UTF-8">
   <title>Okay...</title>
   <style>
-#confetti {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 9999;
-}
-</style>
+  #emojiCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+  }
     body {
       background: linear-gradient(135deg,#343a40,#6c757d);
       font-family: Arial, sans-serif;
@@ -58,55 +59,56 @@
     <a href="index.html" class="btn">GO BACK TO PAGE 1</a>
   </div>
   <script>
-const canvas = document.getElementById("confetti");
+const canvas = document.getElementById("emojiCanvas");
 const ctx = canvas.getContext("2d");
-
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 canvas.style.width = "100%";
 canvas.style.height = "100%";
-let pieces = [];
-let interval;
 
-// Create 😭 emoji particles
-function createConfetti() {
-  pieces = [];
-  for (let i = 0; i < 120; i++) {
-    pieces.push({
+let particles = [];
+let animation;
+
+// Create 😭 particles
+function createParticles() {
+  particles = [];
+  for (let i = 0; i < 80; i++) {
+    particles.push({
       x: Math.random() * canvas.width,
       y: Math.random() * -canvas.height,
-      size: Math.random() * 8 + 12,
-      speed: Math.random() * 2 + 1.5
+      size: Math.random() * 6 + 18, // SAFE size
+      speed: Math.random() * 1.5 + 1
     });
   }
 }
 
-// Draw 😭 emoji
-function drawConfetti() {
+// Draw 😭 safely
+function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  pieces.forEach(p => {
-    ctx.font = `${p.size}px Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, serif`;
+  particles.forEach(p => {
+    ctx.font = `${p.size}px Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji`;
     ctx.textBaseline = "top";
-    ctx.fillText("X", p.x, p.y);
+    ctx.fillText("😭", p.x, p.y);
     p.y += p.speed;
   });
 }
 
-// Start when page loads
-function startConfetti() {
-  createConfetti();
-  interval = setInterval(drawConfetti, 20);
+// Start animation
+function startCrying() {
+  createParticles();
+  animation = setInterval(draw, 25);
 
-  // Stop after 4 seconds
+  // STOP after 3.5 seconds (important)
   setTimeout(() => {
-    clearInterval(interval);
+    clearInterval(animation);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-  }, 4000);
+  }, 3500);
 }
 
-window.onload = startConfetti;
+// Auto start on page load
+window.addEventListener("load", startCrying);
   </script>
 </body>
 </html>
